@@ -36,27 +36,27 @@ func main() {
 			continue
 		}
 
-		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
+		sendMatches(bot, update.Message.Chat.ID)
+	}
+}
 
-		for _, match := range openligaapi.GetMatches() {
-			hour := checkForMatchWarnings(match)
-			if hour == 0 {
-				continue
-			}
-
-			text := formatText(match, hour)
-			chatId := update.Message.Chat.ID
-
-			msg := tgbotapi.NewMessage(chatId, text)
-			msg.ParseMode = "markdown"
-			_, err = bot.Send(msg)
-
-			if err != nil {
-				log.Panic(err)
-			}
-
-			break
+func sendMatches(bot *tgbotapi.BotAPI, chatId int64) {
+	for _, match := range openligaapi.GetMatches() {
+		hour := checkForMatchWarnings(match)
+		if hour == 0 {
+			continue
 		}
+
+		text := formatText(match, hour)
+		msg := tgbotapi.NewMessage(chatId, text)
+		msg.ParseMode = "markdown"
+		_, err := bot.Send(msg)
+
+		if err != nil {
+			log.Panic(err)
+		}
+
+		break
 	}
 }
 
