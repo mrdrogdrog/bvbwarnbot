@@ -30,7 +30,7 @@ func GetMatches() []Match {
 	req, err := http.NewRequest("GET", fmt.Sprintf("https://www.openligadb.de/api/getmatchdata/bl1/%d", currentTime.Year()), nil)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil
 	}
 
