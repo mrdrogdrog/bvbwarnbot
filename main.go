@@ -17,7 +17,7 @@ func avoidText(heimspiel bool) (string, string) {
 }
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI("945610724:AAGVtdQK_YO_Mybtml5trnyKQb_erKdfFoA")
+	bot, err := tgbotapi.NewBotAPI("")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -26,38 +26,66 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
+	id := "bvbspielwarnung"
 
-	updates, err := bot.GetUpdatesChan(u)
-
-	for update := range updates {
-		if update.Message == nil { // ignore any non-Message Updates
-			continue
-		}
-
-		sendMatches(bot, update.Message.Chat.ID)
+	for true {
+		processCron(bot, id)
+		log.Println("sleeping for 1 hour..")
+		time.Sleep(time.Hour * time.Duration(1))
 	}
 }
 
-func sendMatches(bot *tgbotapi.BotAPI, chatId int64) {
+func processCron(bot *tgbotapi.BotAPI, id string) {
+	log.Println("Waky Waky! Time to check!")
+	match := findNextMatch()
+	if match == nil {
+		log.Println("No Match found.")
+		return
+	}
+
+	log.Println("Possible next match: " + match.Team1.TeamName + " vs " + match.Team2.TeamName + " on " + match.MatchDateTimeUTC.String())
+	hour := checkForMatchWarnings(*match)
+	if hour == 0 {
+		log.Println("no warning needed")
+		return
+	}
+
+	log.Println(string(hour) + " warning should be sent")
+	text := formatText(*match, hour)
+
+	msg := tgbotapi.NewMessageToChannel(id, text)
+	msg.ParseMode = "markdown"
+	log.Println("sending to channel...")
+	_, err := bot.Send(msg)
+
+	if err != nil {
+		log.Println("oh no :( telegram error")
+		log.Println(err)
+		return
+	}
+	log.Println("sent!")
+}
+
+func findNextMatch() *openligaapi.Match {
+	currentTime := now()
+	log.Println("the time is: " + currentTime.String())
 	for _, match := range openligaapi.GetMatches() {
-		hour := checkForMatchWarnings(match)
-		if hour == 0 {
+
+		if match.MatchDateTimeUTC.Before(currentTime) {
 			continue
 		}
 
-		text := formatText(match, hour)
-		msg := tgbotapi.NewMessage(chatId, text)
-		msg.ParseMode = "markdown"
-		_, err := bot.Send(msg)
-
-		if err != nil {
-			log.Panic(err)
+		if match.Team1.TeamId != 7 && match.Team2.TeamId != 7 {
+			continue
 		}
 
-		break
+		return &match
 	}
+	return nil
+}
+
+func now() time.Time {
+	return time.Now().Add(time.Duration(-24) * time.Hour)
 }
 
 func formatText(match openligaapi.Match, hour int) string {
@@ -75,7 +103,7 @@ func formatText(match openligaapi.Match, hour int) string {
 
 	text := fmt.Sprintf(format,
 		hour,
-		match.MatchDateTimeUTC.Format("02.01.2006 - 15:04"),
+		match.MatchDateTimeUTC.Format("Mon, 02.01.2006 - 15:04"),
 		match.Team1.TeamName, match.Team2.TeamName,
 		matchType,
 		avoidText)
@@ -84,25 +112,18 @@ func formatText(match openligaapi.Match, hour int) string {
 }
 
 func checkForMatchWarnings(match openligaapi.Match) int {
-	currentTime := time.Now()
-
-	if match.MatchDateTimeUTC.Before(currentTime) {
-		return 0
-	}
-
-	if match.Team1.TeamId != 7 && match.Team2.TeamId != 7 {
-		return 0
-	}
-
+	log.Println(match)
+	currentTime := now()
+	log.Println(currentTime)
 	hours := []int{1, 3, 6, 12, 24, 48}
 
 	for _, hour := range hours {
-		hourShift := currentTime.Add(time.Hour * time.Duration(hour))
-		if match.MatchDateTimeUTC.After(hourShift) {
-			continue
-		}
+		hourShiftStart := currentTime.Add(time.Hour * time.Duration(hour-1))
+		hourShiftEnd := currentTime.Add(time.Hour * time.Duration(hour))
 
-		return hour
+		if match.MatchDateTimeUTC.After(hourShiftStart) && match.MatchDateTimeUTC.Before(hourShiftEnd) {
+			return hour
+		}
 	}
 
 	return 0

@@ -10,15 +10,15 @@ import (
 )
 
 type Team struct {
-	ShortName string
-	TeamName string
-	TeamId int
+	ShortName   string
+	TeamName    string
+	TeamId      int
 	TeamIconUrl string
 }
 
 type Match struct {
-	Team1 Team
-	Team2 Team
+	Team1            Team
+	Team2            Team
 	MatchDateTimeUTC time.Time
 }
 
@@ -26,8 +26,7 @@ func GetMatches() []Match {
 
 	currentTime := time.Now()
 
-	client := &http.Client{
-	}
+	client := &http.Client{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("https://www.openligadb.de/api/getmatchdata/bl1/%d", currentTime.Year()), nil)
 
 	if err != nil {
@@ -40,18 +39,21 @@ func GetMatches() []Match {
 	res, err := client.Do(req)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil
 	}
 
 	body, readErr := ioutil.ReadAll(res.Body)
 	if readErr != nil {
-		log.Fatal(readErr)
+		log.Println(readErr)
+		return nil
 	}
 
 	var matches []Match
 	jsonErr := json.Unmarshal(body, &matches)
 	if jsonErr != nil {
-		log.Fatal(jsonErr)
+		log.Println(jsonErr)
+		return nil
 	}
 
 	return matches
