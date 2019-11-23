@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./config"
 	"./openligaapi"
 	"fmt"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
@@ -8,16 +9,20 @@ import (
 	"time"
 )
 
+var appConfig config.AppConfig
+
 func avoidText(heimspiel bool) (string, string) {
 	if heimspiel {
-		return "🏠Heimspiel", "Vermeide U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz"
+		return appConfig.Warnings.HomeTitle, appConfig.Warnings.HomeMessage
 	} else {
-		return "🏕Auswärtsspiel", "Vermeide Kneipen mit TV"
+		return appConfig.Warnings.GuestTitle, appConfig.Warnings.GuestMessage
 	}
 }
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI("")
+	appConfig = *config.ReadConfig()
+
+	bot, err := tgbotapi.NewBotAPI(appConfig.Telegram.ApiKey)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -26,16 +31,14 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	id := "bvbspielwarnung"
-
 	for true {
-		processCron(bot, id)
+		processCron(bot)
 		log.Println("sleeping for 1 hour..")
 		time.Sleep(time.Hour * time.Duration(1))
 	}
 }
 
-func processCron(bot *tgbotapi.BotAPI, id string) {
+func processCron(bot *tgbotapi.BotAPI) {
 	log.Println("Waky Waky! Time to check!")
 	match := findNextMatch()
 	if match == nil {
@@ -50,12 +53,12 @@ func processCron(bot *tgbotapi.BotAPI, id string) {
 		return
 	}
 
-	log.Println(string(hour) + " warning should be sent")
+	log.Printf("%dh warning should be sent", hour)
 	text := formatText(*match, hour)
 
-	msg := tgbotapi.NewMessageToChannel(id, text)
+	log.Println("sending to channel " + appConfig.Telegram.ChannelName)
+	msg := tgbotapi.NewMessageToChannel(appConfig.Telegram.ChannelName, text)
 	msg.ParseMode = "markdown"
-	log.Println("sending to channel...")
 	_, err := bot.Send(msg)
 
 	if err != nil {
@@ -85,7 +88,7 @@ func findNextMatch() *openligaapi.Match {
 }
 
 func now() time.Time {
-	return time.Now().Add(time.Duration(-24) * time.Hour)
+	return time.Now().Add(time.Duration(-25) * time.Hour)
 }
 
 func formatText(match openligaapi.Match, hour int) string {
@@ -115,9 +118,8 @@ func checkForMatchWarnings(match openligaapi.Match) int {
 	log.Println(match)
 	currentTime := now()
 	log.Println(currentTime)
-	hours := []int{1, 3, 6, 12, 24, 48}
 
-	for _, hour := range hours {
+	for _, hour := range appConfig.Warnings.Intervals {
 		hourShiftStart := currentTime.Add(time.Hour * time.Duration(hour-1))
 		hourShiftEnd := currentTime.Add(time.Hour * time.Duration(hour))
 

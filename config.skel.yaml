@@ -1,0 +1,15 @@
+---
+telegram:
+  api_key: ""
+  channel_name: "bvbspielwarnung"
+warnings:
+  intervals:
+    - 24
+    - 6
+    - 3
+    - 1
+  home_title: "🏠Heimspiel"
+  home_message: "Vermeide U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz"
+  guest_title: "🏕Auswärtsspiel"
+  guest_message: "Vermeide Kneipen mit TV"
+
