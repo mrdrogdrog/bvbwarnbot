@@ -53,7 +53,7 @@ func processCron(bot *tgbotapi.BotAPI) {
 	log.Println("Possible next match: " + match.Team1.TeamName + " vs " + match.Team2.TeamName + " on " + match.MatchDateTimeUTC.String())
 	hour := checkForMatchWarnings(*match)
 	if hour == 0 {
-		log.Println("no warning needed")
+		log.Println("No warning needed")
 		return
 	}
 
@@ -75,7 +75,7 @@ func processCron(bot *tgbotapi.BotAPI) {
 
 func findNextMatch() *openligaapi.Match {
 	currentTime := now()
-	log.Println("the time is: " + currentTime.String())
+	log.Println("Time time is: " + currentTime.String())
 	for _, match := range openligaapi.GetMatches() {
 
 		if match.MatchDateTimeUTC.Before(currentTime) {
