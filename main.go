@@ -37,8 +37,8 @@ func main() {
 
 	for true {
 		processCron(bot)
-		log.Println("sleeping for 1 hour..")
-		time.Sleep(time.Hour * time.Duration(1))
+		log.Printf("Sleep for %d hour", appConfig.FetchInterval)
+		time.Sleep(time.Hour * time.Duration(appConfig.FetchInterval))
 	}
 }
 
