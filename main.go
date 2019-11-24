@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
+	"sort"
 	"time"
 )
 
@@ -23,6 +24,7 @@ func main() {
 	appConfig = *config.ReadConfig()
 
 	appConfig.Validate()
+	sort.Ints(appConfig.Warnings.Intervals)
 
 	bot, err := tgbotapi.NewBotAPI(appConfig.Telegram.ApiKey)
 	if err != nil {
