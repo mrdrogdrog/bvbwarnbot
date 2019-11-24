@@ -1,8 +1,8 @@
 package matchcheck
 
 import (
-	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/config"
-	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/openligaapi"
+	"git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot/internal/config"
+	"git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot/internal/openligaapi"
 	"log"
 	"time"
 )

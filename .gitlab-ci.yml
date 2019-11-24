@@ -3,7 +3,7 @@ image: golang:latest
 
 variables:
   # Please edit to your GitLab project
-  REPO_NAME: git.openschubla.de/tilman/bvb-warn-telegram-bot
+  REPO_NAME: git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot
 
 before_script:
   - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)

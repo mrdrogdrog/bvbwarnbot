@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/config"
-	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/matchcheck"
+	"git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot/internal/config"
+	"git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot/internal/matchcheck"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"time"
