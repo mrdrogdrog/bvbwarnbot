@@ -1,10 +1,15 @@
 # This file is a template, and might need editing before it works on your project.
 image: golang:latest
 
+variables:
+  # Please edit to your GitLab project
+  REPO_NAME: git.openschubla.de/tilman/bvb-warn-telegram-bot
+
 before_script:
   - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
   - ln -svf $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
   - cd $GOPATH/src/$REPO_NAME
+  - go get ./...
 
 stages:
   - test
@@ -21,7 +26,7 @@ format:
 compile:
   stage: build
   script:
-    - go build -race -ldflags "-extldflags '-static'" -o $CI_PROJECT_DIR/bvbspielwarnung
+    - go build -race -ldflags "-extldflags '-static'" -o bvbspielwarnung $REPO_NAME/cmd/bvbspielwarnung
   artifacts:
     paths:
       - bvbspielwarnung

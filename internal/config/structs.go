@@ -2,13 +2,13 @@ package config
 
 import "log"
 
-type AppConfig struct {
+type AppConfigYaml struct {
 	Telegram      TelegramConfig `yaml:"telegram"`
 	Warnings      WarningConfig  `yaml:"warnings"`
 	FetchInterval int            `yaml:"fetch_interval"`
 }
 
-func (config AppConfig) Validate() {
+func (config AppConfigYaml) Validate() {
 	if config.FetchInterval < 0 {
 		log.Fatal("Fetch interval wasn't set to a positive integer")
 	}

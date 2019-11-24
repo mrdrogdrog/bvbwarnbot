@@ -1,8 +1,9 @@
-package main
+package matchcheck
 
 import (
-	"./openligaapi"
 	"fmt"
+	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/config"
+	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/openligaapi"
 )
 
 func formatText(match openligaapi.Match, hour int) string {
@@ -30,8 +31,8 @@ func formatText(match openligaapi.Match, hour int) string {
 
 func avoidText(heimspiel bool) (string, string) {
 	if heimspiel {
-		return appConfig.Warnings.HomeTitle, appConfig.Warnings.HomeMessage
+		return config.AppConfig.Warnings.HomeTitle, config.AppConfig.Warnings.HomeMessage
 	} else {
-		return appConfig.Warnings.GuestTitle, appConfig.Warnings.GuestMessage
+		return config.AppConfig.Warnings.GuestTitle, config.AppConfig.Warnings.GuestMessage
 	}
 }

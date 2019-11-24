@@ -1,7 +1,8 @@
-package main
+package matchcheck
 
 import (
-	"./openligaapi"
+	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/config"
+	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/openligaapi"
 	"log"
 	"time"
 )
@@ -9,7 +10,7 @@ import (
 func checkForMatchWarnings(match openligaapi.Match) int {
 	currentTime := now()
 
-	for _, hour := range appConfig.Warnings.Intervals {
+	for _, hour := range config.AppConfig.Warnings.Intervals {
 		difference := match.MatchDateTimeUTC.Sub(currentTime)
 		if difference < (time.Hour * time.Duration(hour)) {
 			return hour
@@ -38,5 +39,5 @@ func findNextMatch() *openligaapi.Match {
 }
 
 func now() time.Time {
-	return time.Now().Add(time.Duration(-25) * time.Hour)
+	return time.Now()
 }

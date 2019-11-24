@@ -1,11 +1,12 @@
-package main
+package matchcheck
 
 import (
+	"git.openschubla.de/tilman/bvb-warn-telegram-bot/internal/config"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 )
 
-func processCron(bot *tgbotapi.BotAPI) {
+func ProcessCron(bot *tgbotapi.BotAPI) {
 	log.Println("Waky Waky! Time to check!")
 	match := findNextMatch()
 	if match == nil {
@@ -23,8 +24,8 @@ func processCron(bot *tgbotapi.BotAPI) {
 	log.Printf("%dh warning should be sent", hour)
 	text := formatText(*match, hour)
 
-	log.Println("sending to channel " + appConfig.Telegram.ChannelName)
-	msg := tgbotapi.NewMessageToChannel(appConfig.Telegram.ChannelName, text)
+	log.Println("sending to channel " + config.AppConfig.Telegram.ChannelName)
+	msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ChannelName, text)
 	msg.ParseMode = "markdown"
 	_, err := bot.Send(msg)
 
