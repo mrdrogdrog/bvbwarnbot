@@ -21,6 +21,11 @@ func (config AppConfig) Validate() {
 	if config.Warnings.Intervals == nil || len(config.Warnings.Intervals) == 0 {
 		log.Fatal("No warning intervals were set")
 	}
+	for _, interval := range config.Warnings.Intervals {
+		if interval <= 0 {
+			log.Fatal("A warning interval wasn't set to a positive integer")
+		}
+	}
 	if config.Warnings.GuestTitle == "" {
 		log.Fatal("Guest title was not set")
 	}
