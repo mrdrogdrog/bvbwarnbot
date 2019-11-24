@@ -119,15 +119,11 @@ func formatText(match openligaapi.Match, hour int) string {
 }
 
 func checkForMatchWarnings(match openligaapi.Match) int {
-	log.Println(match)
 	currentTime := now()
-	log.Println(currentTime)
 
 	for _, hour := range appConfig.Warnings.Intervals {
-		hourShiftStart := currentTime.Add(time.Hour * time.Duration(hour-1))
-		hourShiftEnd := currentTime.Add(time.Hour * time.Duration(hour))
-
-		if match.MatchDateTimeUTC.After(hourShiftStart) && match.MatchDateTimeUTC.Before(hourShiftEnd) {
+		difference := match.MatchDateTimeUTC.Sub(currentTime)
+		if difference < (time.Hour * time.Duration(hour)) {
 			return hour
 		}
 	}
