@@ -22,6 +22,8 @@ func avoidText(heimspiel bool) (string, string) {
 func main() {
 	appConfig = *config.ReadConfig()
 
+	appConfig.Validate()
+
 	bot, err := tgbotapi.NewBotAPI(appConfig.Telegram.ApiKey)
 	if err != nil {
 		log.Panic(err)
