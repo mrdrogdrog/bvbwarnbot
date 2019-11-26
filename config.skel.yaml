@@ -1,5 +1,6 @@
 ---
 fetch_interval: 1
+team_id: 7
 telegram:
   api_key: ""
   channel_name: "bvbspielwarnung"

@@ -6,6 +6,7 @@ type AppConfigYaml struct {
 	Telegram      TelegramConfig `yaml:"telegram"`
 	Warnings      WarningConfig  `yaml:"warnings"`
 	FetchInterval int            `yaml:"fetch_interval"`
+	TeamId        int            `yaml:"team_id"`
 }
 
 func (config AppConfigYaml) Validate() {

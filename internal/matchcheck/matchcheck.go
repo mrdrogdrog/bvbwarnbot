@@ -29,7 +29,7 @@ func findNextMatch() *openligaapi.Match {
 			continue
 		}
 
-		if match.Team1.TeamId != 7 && match.Team2.TeamId != 7 {
+		if match.Team1.TeamId != config.AppConfig.TeamId && match.Team2.TeamId != config.AppConfig.TeamId {
 			continue
 		}
 
