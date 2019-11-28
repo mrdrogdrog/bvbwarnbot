@@ -10,6 +10,7 @@ import (
 var AppConfig AppConfigYaml
 
 func ReadConfig() {
+	log.Print("[Config] Reading config")
 
 	yamlFile, err := ioutil.ReadFile("config.yaml")
 	if err != nil {

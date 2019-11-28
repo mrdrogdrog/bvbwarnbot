@@ -11,36 +11,36 @@ type AppConfigYaml struct {
 
 func (config AppConfigYaml) Validate() {
 	if config.FetchInterval < 0 {
-		log.Fatal("Fetch interval wasn't set to a positive integer")
+		log.Fatal("[Config] Fetch interval isn't set to a positive integer")
 	}
 	if config.TeamId < 0 {
-		log.Fatal("Team id wasn't set to a positive integer")
+		log.Fatal("[Config] Team id isn't set to a positive integer")
 	}
 	if config.Telegram.ApiKey == "" {
-		log.Fatal("Telegram bot api key wasn't set")
+		log.Fatal("[Config] Telegram bot api key isn't set")
 	}
 	if config.Telegram.ChannelName == "" {
-		log.Fatal("Telegram channel name wasn't set")
+		log.Fatal("[Config] Telegram channel name isnt't set")
 	}
 	if config.Warnings.Intervals == nil || len(config.Warnings.Intervals) == 0 {
-		log.Fatal("No warning intervals were set")
+		log.Fatal("[Config] No warning intervals aren't set")
 	}
 	for _, interval := range config.Warnings.Intervals {
 		if interval <= 0 {
-			log.Fatal("A warning interval wasn't set to a positive integer")
+			log.Fatal("[Config] A warning interval isn't set to a positive integer")
 		}
 	}
 	if config.Warnings.GuestTitle == "" {
-		log.Fatal("Guest title was not set")
+		log.Fatal("[Config] Guest title isn't set")
 	}
 	if config.Warnings.GuestMessage == "" {
-		log.Fatal("Guest message was not set")
+		log.Fatal("[Config] Guest message isn't set")
 	}
 	if config.Warnings.HomeTitle == "" {
-		log.Fatal("Guest title was not set")
+		log.Fatal("[Config] Guest title isn't set")
 	}
 	if config.Warnings.HomeMessage == "" {
-		log.Fatal("Guest message was not set")
+		log.Fatal("[Config] Guest message isn't set")
 	}
 }
 

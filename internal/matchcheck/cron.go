@@ -7,32 +7,31 @@ import (
 )
 
 func ProcessCron(bot *tgbotapi.BotAPI) {
-	log.Println("Waky Waky! Time to check!")
+	log.Println("[MatchCheck] Waky Waky! Time to check!")
 	match := findNextMatch()
 	if match == nil {
-		log.Println("No Match found.")
+		log.Println("[MatchCheck] No Match found.")
 		return
 	}
 
-	log.Println("Possible next match: " + match.Team1.TeamName + " vs " + match.Team2.TeamName + " on " + match.MatchDateTimeUTC.String())
+	log.Println("[MatchCheck] Possible next match: " + match.Team1.TeamName + " vs " + match.Team2.TeamName + " on " + match.MatchDateTimeUTC.String())
 	hour := checkForMatchWarnings(*match)
 	if hour == 0 {
-		log.Println("No warning needed")
+		log.Println("[MatchCheck] No warning needed")
 		return
 	}
 
-	log.Printf("%dh warning should be sent", hour)
+	log.Printf("[MatchCheck] %dh warning should be sent", hour)
 	text := formatText(*match, hour)
 
-	log.Println("sending to channel " + config.AppConfig.Telegram.ChannelName)
+	log.Println("[Telegram] Sending to channel " + config.AppConfig.Telegram.ChannelName)
 	msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ChannelName, text)
 	msg.ParseMode = "markdown"
 	_, err := bot.Send(msg)
 
 	if err != nil {
-		log.Println("oh no :( telegram error")
-		log.Println(err)
+		log.Printf("[Telegram] Error: %s", err)
 		return
 	}
-	log.Println("sent!")
+	log.Println("[Telegram] Message sent")
 }

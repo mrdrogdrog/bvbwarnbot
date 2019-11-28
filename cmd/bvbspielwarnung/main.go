@@ -18,11 +18,12 @@ func main() {
 
 	bot.Debug = false
 
-	log.Printf("Authorized on account %s", bot.Self.UserName)
+	log.Printf("[Telegram] Authorized on account %s", bot.Self.UserName)
+	log.Printf("[Telegram] The target is %s", config.AppConfig.Telegram.ChannelName)
 
 	for true {
 		matchcheck.ProcessCron(bot)
-		log.Printf("Sleep for %d hour", config.AppConfig.FetchInterval)
+		log.Printf("[Main] Sleep for %d hour", config.AppConfig.FetchInterval)
 		time.Sleep(time.Hour * time.Duration(config.AppConfig.FetchInterval))
 	}
 }
