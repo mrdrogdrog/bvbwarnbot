@@ -22,7 +22,6 @@ func checkForMatchWarnings(match openligaapi.Match) int {
 
 func findNextMatch() *openligaapi.Match {
 	currentTime := now()
-	log.Println("Time time is: " + currentTime.String())
 	for _, match := range openligaapi.GetMatches() {
 
 		if match.MatchDateTimeUTC.Before(currentTime) {
