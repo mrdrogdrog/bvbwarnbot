@@ -16,8 +16,6 @@ func main() {
 		log.Panic(err)
 	}
 
-	bot.Debug = false
-
 	log.Printf("[Telegram] Authorized on account %s", bot.Self.UserName)
 	log.Printf("[Telegram] The target is %s", config.AppConfig.Telegram.ChannelName)
 
