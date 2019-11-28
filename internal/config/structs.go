@@ -13,6 +13,9 @@ func (config AppConfigYaml) Validate() {
 	if config.FetchInterval < 0 {
 		log.Fatal("Fetch interval wasn't set to a positive integer")
 	}
+	if config.TeamId < 0 {
+		log.Fatal("Team id wasn't set to a positive integer")
+	}
 	if config.Telegram.ApiKey == "" {
 		log.Fatal("Telegram bot api key wasn't set")
 	}
