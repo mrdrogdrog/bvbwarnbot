@@ -5,8 +5,8 @@ RUN apt update -qq && apt full-upgrade -y -qq && apt install ca-certificates -y 
 
 RUN mkdir -p /opt/bvbwarnbot
 
-COPY ./bvbwarnbot /opt/bvbwarnbot/bot
-RUN chmod +x /opt/bvbwarnbot/bot
+COPY ./bvbwarnbot-telegram /opt/bvbwarnbot/telegram
+RUN chmod +x /opt/bvbwarnbot/telegram
 
 WORKDIR /opt/bvbwarnbot
-ENTRYPOINT ["/opt/bvbwarnbot/bot"]
+ENTRYPOINT ["/opt/bvbwarnbot/telegram"]
