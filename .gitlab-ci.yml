@@ -24,7 +24,7 @@ format:
 compile:
   stage: build
   script:
-    - go build -race -ldflags "-extldflags '-static'" -o bvbspielwarnung $REPO_NAME/cmd/bvbwarnbot-telegram
+    - go build -race -ldflags "-extldflags '-static'" -o bvbwarnbot-telegram $REPO_NAME/cmd/bvbwarnbot-telegram
   artifacts:
     paths:
       - bvbspielwarnbot-telegram
