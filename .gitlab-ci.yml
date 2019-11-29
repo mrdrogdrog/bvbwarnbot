@@ -1,8 +1,6 @@
-# This file is a template, and might need editing before it works on your project.
 image: golang:latest
 
 variables:
-  # Please edit to your GitLab project
   REPO_NAME: git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot
 
 before_script:
