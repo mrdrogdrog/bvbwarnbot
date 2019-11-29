@@ -1,4 +1,4 @@
-package matchcheck
+package matchfinder
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"git.openschubla.de/tilman/bvbwarnbot/internal/openligaapi"
 )
 
-func formatText(match openligaapi.Match, hour int) string {
+func FormatText(match openligaapi.Match, hour int) string {
 	format :=
 		"⚠️*%dh-Warnung!*⚠️\n" +
 			"\n" +

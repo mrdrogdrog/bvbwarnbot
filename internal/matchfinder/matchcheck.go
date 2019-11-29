@@ -1,4 +1,4 @@
-package matchcheck
+package matchfinder
 
 import (
 	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func checkForMatchWarnings(match openligaapi.Match) int {
+func CheckIfMatchWarningIsNeeded(match openligaapi.Match) int {
 	currentTime := now()
 
 	for _, hour := range config.AppConfig.Warnings.Intervals {
@@ -20,7 +20,7 @@ func checkForMatchWarnings(match openligaapi.Match) int {
 	return 0
 }
 
-func findNextMatch() *openligaapi.Match {
+func FindNextMatch() *openligaapi.Match {
 	currentTime := now()
 	for _, match := range openligaapi.GetMatches() {
 
