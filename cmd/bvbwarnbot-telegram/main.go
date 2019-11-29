@@ -24,7 +24,7 @@ func main() {
 
 		if text != nil {
 			log.Println("[Telegram] Sending to channel " + config.AppConfig.Telegram.ChannelName)
-			msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ChannelName, text)
+			msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ChannelName, *text)
 			msg.ParseMode = "markdown"
 			_, err := bot.Send(msg)
 
