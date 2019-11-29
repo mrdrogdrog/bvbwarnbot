@@ -41,4 +41,4 @@ docker:
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:latest
     - (docker stop bvbwarnbot && docker rm bvbwarnbot) || true
-    - docker run -v /etc/bvbwarnbot.yaml:/opt/bvbwarnbot/config.yaml:ro --name bvbwarnbot $CI_REGISTRY_IMAGE:latest
+    - docker run -v /etc/bvbwarnbot.yaml:/opt/bvbwarnbot/config.yaml:ro -d --name bvbwarnbot $CI_REGISTRY_IMAGE:latest

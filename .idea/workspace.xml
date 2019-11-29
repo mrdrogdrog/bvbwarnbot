@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7ea9294-7631-4e23-ba16-28bc4ea51a89" name="Default Changelist" comment="remove unused debug">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
+    <list default="true" id="d7ea9294-7631-4e23-ba16-28bc4ea51a89" name="Default Changelist" comment="add disabled docker build support">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -109,6 +107,11 @@
     <MESSAGE value="replace an error function" />
     <MESSAGE value="improve log" />
     <MESSAGE value="remove unused debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove unused debug" />
+    <MESSAGE value="add disabled docker build support" />
+    <MESSAGE value="fix bug that makes bot repeat every hour" />
+    <MESSAGE value="fix bug that makes the bot repeat every hour" />
+    <MESSAGE value="add docker" />
+    <MESSAGE value="add stage" />
+    <option name="LAST_COMMIT_MESSAGE" value="add stage" />
   </component>
 </project>

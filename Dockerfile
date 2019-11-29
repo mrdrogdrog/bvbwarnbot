@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 LABEL MAINTAINER="Tilman Vatteroth<ich@tilmanvatteroth.de>"
 
-RUN apt update && apt full-upgrade -y
+RUN apt update -qq && apt full-upgrade -y -qq && apt install ca-certificates -y -qq
 
 RUN mkdir -p /opt/bvbwarnbot
 
