@@ -11,7 +11,8 @@ func checkForMatchWarnings(match openligaapi.Match) int {
 
 	for _, hour := range config.AppConfig.Warnings.Intervals {
 		difference := match.MatchDateTimeUTC.Sub(currentTime)
-		if difference < (time.Hour * time.Duration(hour)) {
+		if difference <= (time.Hour*time.Duration(hour)) &&
+			difference >= (time.Hour*time.Duration(hour-1)) {
 			return hour
 		}
 	}
