@@ -2,8 +2,8 @@ package matchcheck
 
 import (
 	"fmt"
-	"git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot/internal/config"
-	"git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot/internal/openligaapi"
+	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
+	"git.openschubla.de/tilman/bvbwarnbot/internal/openligaapi"
 )
 
 func formatText(match openligaapi.Match, hour int) string {
