@@ -3,10 +3,10 @@ LABEL MAINTAINER="Tilman Vatteroth<ich@tilmanvatteroth.de>"
 
 RUN apt update && apt full-upgrade -y
 
-RUN mkdir -p /opt/bvbspielwarnung
+RUN mkdir -p /opt/bvbwarnbot
 
-COPY ./bvbspielwarnung /opt/bvbspielwarnung/bot
-RUN chmod +x /opt/bvbspielwarnung/bot
+COPY ./bvbspielwarnung /opt/bvbwarnbot/bot
+RUN chmod +x /opt/bvbwarnbot/bot
 
-WORKDIR /opt/bvbspielwarnung
-ENTRYPOINT ["/opt/bvbspielwarnung/bot"]
+WORKDIR /opt/bvbwarnbot
+ENTRYPOINT ["/opt/bvbwarnbot/bot"]
