@@ -1,7 +1,7 @@
 image: golang:latest
 
 variables:
-  REPO_NAME: git.openschubla.de/tilman/bvb-spiel-warnung-telegram-bot
+  REPO_NAME: git.openschubla.de/tilman/bvbwarnbot
 
 before_script:
   - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
@@ -24,10 +24,10 @@ format:
 compile:
   stage: build
   script:
-    - go build -race -ldflags "-extldflags '-static'" -o bvbspielwarnung $REPO_NAME/cmd/bvbspielwarnung
+    - go build -race -ldflags "-extldflags '-static'" -o bvbspielwarnung $REPO_NAME/cmd/bvbwarnbot-telegram
   artifacts:
     paths:
-      - bvbspielwarnung
+      - bvbspielwarnbot-telegram
 
 docker:
   stage: deploy
@@ -40,5 +40,5 @@ docker:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:latest
-    - (docker stop bvbwarnbot && docker rm bvbwarnbot) || true
+    - (docker stop bvbwarnbot-telegram && docker rm bvbwarnbot-telegram) || true
     - docker run -v /etc/bvbwarnbot.yaml:/opt/bvbwarnbot/config.yaml:ro -d --name bvbwarnbot $CI_REGISTRY_IMAGE:latest
