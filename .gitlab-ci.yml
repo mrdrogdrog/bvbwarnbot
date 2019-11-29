@@ -27,7 +27,7 @@ compile:
     - go build -race -ldflags "-extldflags '-static'" -o bvbwarnbot-telegram $REPO_NAME/cmd/bvbwarnbot-telegram
   artifacts:
     paths:
-      - bvbspielwarnbot-telegram
+      - bvbwarnbot-telegram
 
 docker:
   stage: deploy

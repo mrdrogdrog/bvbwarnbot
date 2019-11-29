@@ -5,7 +5,7 @@ RUN apt update -qq && apt full-upgrade -y -qq && apt install ca-certificates -y 
 
 RUN mkdir -p /opt/bvbwarnbot
 
-COPY ./bvbspielwarnung /opt/bvbwarnbot/bot
+COPY ./bvbwarnbot /opt/bvbwarnbot/bot
 RUN chmod +x /opt/bvbwarnbot/bot
 
 WORKDIR /opt/bvbwarnbot
