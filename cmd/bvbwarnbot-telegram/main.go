@@ -25,30 +25,27 @@ func main() {
 		if err != nil {
 			log.Println(err)
 			log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.ErrorName)
-			msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ErrorName, err.Error())
-			msg.ParseMode = "markdown"
-			_, err := bot.Send(msg)
-			if err != nil {
-				log.Printf("[Telegram] Error: %s", err)
-			} else {
-				log.Println("[Telegram] Message sent")
-			}
+			sendTelegram(*text, config.AppConfig.Telegram.ErrorName, bot)
 		}
 
 		if text != nil {
 			log.Printf("[Telegram] Sending to channel %s", config.AppConfig.Telegram.ChannelName)
-			msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ChannelName, *text)
-			msg.ParseMode = "markdown"
-			_, err := bot.Send(msg)
-
-			if err != nil {
-				log.Printf("[Telegram] Error: %s", err)
-			} else {
-				log.Println("[Telegram] Message sent")
-			}
+			sendTelegram(*text, config.AppConfig.Telegram.ChannelName, bot)
 		}
 
 		log.Printf("[Main] Sleep for %d hour", config.AppConfig.FetchInterval)
 		time.Sleep(time.Hour * time.Duration(config.AppConfig.FetchInterval))
+	}
+}
+
+func sendTelegram(message string, receiver string, bot *tgbotapi.BotAPI) {
+	msg := tgbotapi.NewMessageToChannel(receiver, message)
+	msg.ParseMode = "markdown"
+	_, err := bot.Send(msg)
+
+	if err != nil {
+		log.Printf("[Telegram] Error: %s", err)
+	} else {
+		log.Println("[Telegram] Message sent")
 	}
 }
