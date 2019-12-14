@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ea9294-7631-4e23-ba16-28bc4ea51a89" name="Default Changelist" comment="add disabled docker build support">
+      <change afterPath="$PROJECT_DIR$/internal/matchfinder/httpgrabber.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/bvbwarnbot-telegram/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/bvbwarnbot-telegram/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/config/structs.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/structs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/matchfinder/matchcheck.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/matchfinder/matchcheck.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/matchfinder/textformat.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/matchfinder/textformat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/openligaapi/api.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/openligaapi/structs.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/matchfinder/structs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkgs/textgenerator/textgenerator.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/textgenerator/textgenerator.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Go Application" />
+        <option value="HTTP Request" />
         <option value="Go File" />
       </list>
     </option>
@@ -21,17 +30,11 @@
   <component name="GOROOT" path="/usr/lib/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GoLibraries">
-    <option name="urls">
-      <list>
-        <option value="file://$PROJECT_DIR$/../../../.." />
-      </list>
-    </option>
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/internal/config/config.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/cmd/bvbspielwarnung/main.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/cmd/bvbwarnbot-telegram/main.go" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1TzEtCXdvWgoyfkZ7W15Nu1738X" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -40,22 +43,27 @@
     <property name="GO_FMT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmd/bvbwarnbot-telegram/test.go" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/docker" />
-      <recent name="$PROJECT_DIR$/openligaapi" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd/bvbwarnbot-telegram" />
+      <recent name="$PROJECT_DIR$/../openligadbapi" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/matchfinder" />
+      <recent name="$PROJECT_DIR$/cmd/bvbwarnbot-telegram" />
+      <recent name="$PROJECT_DIR$/cmd/test" />
+      <recent name="$PROJECT_DIR$/../openligadbapi/pkgs" />
+      <recent name="$PROJECT_DIR$/internal" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -71,17 +79,18 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build git.openschubla.de/tilman/bvbwarnbot/cmd/bvbwarnbot-telegram" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="bvbwarnbot" />
       <working_directory value="$PROJECT_DIR$/" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/main.go" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/cmd/bvbwarnbot-telegram/test.go" />
+      <package value="git.openschubla.de/tilman/bvbwarnbot/cmd/bvbwarnbot-telegram" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build git.openschubla.de/tilman/bvbwarnbot/cmd/bvbwarnbot-telegram" />
       </list>
     </recent_temporary>
   </component>
@@ -112,6 +121,12 @@
     <MESSAGE value="fix bug that makes the bot repeat every hour" />
     <MESSAGE value="add docker" />
     <MESSAGE value="add stage" />
-    <option name="LAST_COMMIT_MESSAGE" value="add stage" />
+    <MESSAGE value="rename project" />
+    <MESSAGE value="fix name" />
+    <MESSAGE value="fix binary name" />
+    <MESSAGE value="restructure project and extract telegram to cmd" />
+    <MESSAGE value="fix syntax" />
+    <MESSAGE value="fix docker image name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix docker image name" />
   </component>
 </project>

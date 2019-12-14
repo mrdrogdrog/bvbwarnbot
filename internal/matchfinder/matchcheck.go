@@ -2,38 +2,20 @@ package matchfinder
 
 import (
 	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
-	"git.openschubla.de/tilman/bvbwarnbot/internal/openligaapi"
 	"time"
 )
 
-func CheckIfMatchWarningIsNeeded(match openligaapi.Match) int {
+func CheckIfMatchWarningIsNeeded(match Match) *int {
 	currentTime := now()
 
 	for _, hour := range config.AppConfig.Warnings.Intervals {
-		difference := match.MatchDateTimeUTC.Sub(currentTime)
+		difference := match.MatchTime.Sub(currentTime)
 		if difference <= (time.Hour*time.Duration(hour)) &&
 			difference >= (time.Hour*time.Duration(hour-1)) {
-			return hour
+			return &hour
 		}
 	}
 
-	return 0
-}
-
-func FindNextMatch() *openligaapi.Match {
-	currentTime := now()
-	for _, match := range openligaapi.GetMatches() {
-
-		if match.MatchDateTimeUTC.Before(currentTime) {
-			continue
-		}
-
-		if match.Team1.TeamId != config.AppConfig.TeamId && match.Team2.TeamId != config.AppConfig.TeamId {
-			continue
-		}
-
-		return &match
-	}
 	return nil
 }
 

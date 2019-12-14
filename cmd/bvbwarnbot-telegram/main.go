@@ -2,8 +2,8 @@ package main
 
 import (
 	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
-	"git.openschubla.de/tilman/bvbwarnbot/pkgs/textgenerator"
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+	"git.openschubla.de/tilman/bvbwarnbot/internal/textgenerator"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"time"
 )
@@ -20,19 +20,32 @@ func main() {
 	log.Printf("[Telegram] The target is %s", config.AppConfig.Telegram.ChannelName)
 
 	for true {
-		text := textgenerator.GenerateTextForNextMatch()
+		text, err := textgenerator.GenerateTextForNextMatch()
+
+		if err != nil {
+			log.Println(err)
+			log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.ErrorName)
+			msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ErrorName, err.Error())
+			msg.ParseMode = "markdown"
+			_, err := bot.Send(msg)
+			if err != nil {
+				log.Printf("[Telegram] Error: %s", err)
+			} else {
+				log.Println("[Telegram] Message sent")
+			}
+		}
 
 		if text != nil {
-			log.Println("[Telegram] Sending to channel " + config.AppConfig.Telegram.ChannelName)
+			log.Printf("[Telegram] Sending to channel %s", config.AppConfig.Telegram.ChannelName)
 			msg := tgbotapi.NewMessageToChannel(config.AppConfig.Telegram.ChannelName, *text)
 			msg.ParseMode = "markdown"
 			_, err := bot.Send(msg)
 
 			if err != nil {
 				log.Printf("[Telegram] Error: %s", err)
-				return
+			} else {
+				log.Println("[Telegram] Message sent")
 			}
-			log.Println("[Telegram] Message sent")
 		}
 
 		log.Printf("[Main] Sleep for %d hour", config.AppConfig.FetchInterval)

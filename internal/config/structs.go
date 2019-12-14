@@ -6,15 +6,11 @@ type AppConfigYaml struct {
 	Telegram      TelegramConfig `yaml:"telegram"`
 	Warnings      WarningConfig  `yaml:"warnings"`
 	FetchInterval int            `yaml:"fetch_interval"`
-	TeamId        int            `yaml:"team_id"`
 }
 
 func (config AppConfigYaml) Validate() {
 	if config.FetchInterval < 0 {
 		log.Fatal("[Config] Fetch interval isn't set to a positive integer")
-	}
-	if config.TeamId < 0 {
-		log.Fatal("[Config] Team id isn't set to a positive integer")
 	}
 	if config.Telegram.ApiKey == "" {
 		log.Fatal("[Config] Telegram bot api key isn't set")
@@ -22,11 +18,14 @@ func (config AppConfigYaml) Validate() {
 	if config.Telegram.ChannelName == "" {
 		log.Fatal("[Config] Telegram channel name isnt't set")
 	}
+	if config.Telegram.ErrorName == "" {
+		log.Fatal("[Config] Telegram error channel name isnt't set")
+	}
 	if config.Warnings.Intervals == nil || len(config.Warnings.Intervals) == 0 {
 		log.Fatal("[Config] No warning intervals aren't set")
 	}
 	for _, interval := range config.Warnings.Intervals {
-		if interval <= 0 {
+		if interval < 0 {
 			log.Fatal("[Config] A warning interval isn't set to a positive integer")
 		}
 	}
@@ -47,6 +46,7 @@ func (config AppConfigYaml) Validate() {
 type TelegramConfig struct {
 	ApiKey      string `yaml:"api_key"`
 	ChannelName string `yaml:"channel_name"`
+	ErrorName   string `yaml:"error_name"`
 }
 
 type WarningConfig struct {

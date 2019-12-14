@@ -3,30 +3,57 @@ package matchfinder
 import (
 	"fmt"
 	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
-	"git.openschubla.de/tilman/bvbwarnbot/internal/openligaapi"
+	"time"
 )
 
-func FormatText(match openligaapi.Match, hour int) string {
+func FormatText(match Match, hour int) string {
 	format :=
 		"⚠️*%dh-Warnung!*⚠️\n" +
 			"\n" +
-			"%s\n" +
+			"%s, %s\n" +
 			"%s vs %s\n" +
 			"\n" +
 			"*%s*\n" +
 			"%s\n"
 
-	heimSpiel := match.Team1.TeamId == 7
+	heimSpiel := match.Team1 == "BORUSSIA DORTMUND"
 	matchType, avoidText := avoidText(heimSpiel)
 
 	text := fmt.Sprintf(format,
 		hour,
-		match.MatchDateTimeUTC.Format("Mon, 02.01.2006 - 15:04"),
-		match.Team1.TeamName, match.Team2.TeamName,
+		weekdaystring(match),
+		match.MatchTime.Format("02.01.2006 - 15:04"),
+		match.Team1, match.Team2,
 		matchType,
 		avoidText)
 
 	return text
+}
+
+func weekdaystring(match Match) string {
+	var w string
+	y1, m1, d1 := match.MatchTime.Date()
+	y2, m2, d2 := now().Date()
+	if y1 == y2 && m1 == m2 && d1 == d2 {
+		w = "Heute"
+	} else {
+		w = wochentag(match.MatchTime.Weekday())
+	}
+	return w
+}
+
+func wochentag(dow time.Weekday) string {
+	var dows = [...]string{
+		"Sonntag",
+		"Montag",
+		"Dienstag",
+		"Mittwoch",
+		"Donnerstag",
+		"Freitag",
+		"Samstag",
+	}
+
+	return dows[dow]
 }
 
 func avoidText(heimspiel bool) (string, string) {
