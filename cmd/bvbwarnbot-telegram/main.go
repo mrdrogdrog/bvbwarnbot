@@ -17,7 +17,9 @@ func main() {
 	}
 
 	log.Printf("[Telegram] Authorized on account %s", bot.Self.UserName)
-	log.Printf("[Telegram] The target is %s", config.AppConfig.Telegram.ChannelName)
+	log.Printf("[Telegram] The main target is %s", config.AppConfig.Telegram.ChannelName)
+	log.Printf("[Telegram] The maintainer target is %s", config.AppConfig.Telegram.ErrorName)
+	sendTelegram("Bot is up", config.AppConfig.Telegram.ErrorName, bot)
 
 	for true {
 		text, err := textgenerator.GenerateTextForNextMatch()
