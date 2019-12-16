@@ -16,7 +16,7 @@ func FormatText(match Match, hour int) string {
 			"*%s*\n" +
 			"%s\n"
 
-	heimSpiel := match.Team1 == "BORUSSIA DORTMUND"
+	heimSpiel := match.Team1 == "Borussia Dortmund"
 	matchType, avoidText := avoidText(heimSpiel)
 
 	text := fmt.Sprintf(format,
