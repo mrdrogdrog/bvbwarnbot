@@ -18,7 +18,7 @@ func (config AppConfigYaml) Validate() {
 	if config.Telegram.ChannelName == "" {
 		log.Fatal("[Config] Telegram channel name isnt't set")
 	}
-	if config.Telegram.ErrorName == "" {
+	if config.Telegram.MaintainerName == "" {
 		log.Fatal("[Config] Telegram maintainer channel name isnt't set")
 	}
 	if config.Warnings.Intervals == nil || len(config.Warnings.Intervals) == 0 {

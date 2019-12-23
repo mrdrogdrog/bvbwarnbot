@@ -18,17 +18,17 @@ func main() {
 
 	log.Printf("[Telegram] Authorized on account %s", bot.Self.UserName)
 	log.Printf("[Telegram] The main notification target is %s", config.AppConfig.Telegram.ChannelName)
-	log.Printf("[Telegram] The maintainer notification target is %s", config.AppConfig.Telegram.ErrorName)
+	log.Printf("[Telegram] The maintainer notification target is %s", config.AppConfig.Telegram.MaintainerName)
 	log.Println("[Telegram] Informing the maintainer about the start up")
-	sendTelegram("Bot is up", config.AppConfig.Telegram.ErrorName, bot)
+	sendTelegram("Bot is up", config.AppConfig.Telegram.MaintainerName, bot)
 
 	for true {
 		text, err := textgenerator.GenerateTextForNextMatch()
 
 		if err != nil {
 			log.Println(err)
-			log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.ErrorName)
-			sendTelegram(*text, config.AppConfig.Telegram.ErrorName, bot)
+			log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.MaintainerName)
+			sendTelegram(*text, config.AppConfig.Telegram.MaintainerName, bot)
 		}
 
 		if text != nil {
