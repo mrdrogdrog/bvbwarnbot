@@ -11,8 +11,8 @@ before_script:
 
 stages:
   - test
-  - build
-  - deploy
+  - build-go
+  - build-docker
 
 format:
   stage: test
@@ -22,7 +22,7 @@ format:
     - go test -race $(go list ./... | grep -v /vendor/)
 
 compile:
-  stage: build
+  stage: build-go
   script:
     - go build -race -ldflags "-extldflags '-static'" -o bvbwarnbot-telegram $REPO_NAME/cmd/bvbwarnbot-telegram
   artifacts:
@@ -30,7 +30,7 @@ compile:
       - bvbwarnbot-telegram
 
 docker:
-  stage: deploy
+  stage: build-docker
   image: docker:19.03.5
   environment:
     name: dipper
