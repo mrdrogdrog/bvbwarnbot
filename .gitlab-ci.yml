@@ -40,5 +40,3 @@ docker:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:latest
-    - (docker stop bvbwarnbot-telegram && docker rm bvbwarnbot-telegram) || true
-    - docker run -v /etc/bvbwarnbot.yaml:/opt/bvbwarnbot/config.yaml:ro -d --name bvbwarnbot-telegram $CI_REGISTRY_IMAGE:latest
