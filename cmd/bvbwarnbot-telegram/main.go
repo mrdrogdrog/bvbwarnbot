@@ -17,8 +17,8 @@ func main() {
 	}
 
 	log.Printf("[Telegram] Authorized on account %s", bot.Self.UserName)
-	log.Printf("[Telegram] The main target is %s", config.AppConfig.Telegram.ChannelName)
-	log.Printf("[Telegram] The maintainer target is %s", config.AppConfig.Telegram.ErrorName)
+	log.Printf("[Telegram] The main notification target is %s", config.AppConfig.Telegram.ChannelName)
+	log.Printf("[Telegram] The maintainer notification target is %s", config.AppConfig.Telegram.ErrorName)
 	log.Println("[Telegram] Informing the maintainer about the start up")
 	sendTelegram("Bot is up", config.AppConfig.Telegram.ErrorName, bot)
 
