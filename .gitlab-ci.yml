@@ -31,6 +31,7 @@ compile:
 
 docker:
   stage: build-docker
+  before_script: []
   image: 
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
