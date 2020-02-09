@@ -28,7 +28,7 @@ func main() {
 		if err != nil {
 			log.Println(err)
 			log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.MaintainerName)
-			sendTelegram(*text, config.AppConfig.Telegram.MaintainerName, bot)
+			sendTelegram(err.Error(), config.AppConfig.Telegram.MaintainerName, bot)
 		}
 
 		if text != nil {
