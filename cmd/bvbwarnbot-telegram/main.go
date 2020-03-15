@@ -22,16 +22,45 @@ func main() {
 	log.Println("[Telegram] Informing the maintainer about the start up")
 	sendTelegram("Bot is up", config.AppConfig.Telegram.MaintainerName, bot)
 
+	errorLast := error(nil)
+	errorCount := 0
+	errorFibLast := 0
+	errorFib := 1
+
 	for true {
 		text, err := textgenerator.GenerateTextForNextMatch()
 
 		if err != nil {
-			log.Println(err)
-			log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.MaintainerName)
-			sendTelegram(err.Error(), config.AppConfig.Telegram.MaintainerName, bot)
+			log.Println("[Error]", err)
+
+			if errorLast == nil || errorLast.Error() == err.Error() {
+				if errorLast != nil {
+					log.Println("[Error] Error occurred again for the", errorCount, "time.")
+				}
+				errorCount += 1
+				if errorCount == errorFib+errorFibLast {
+					errorFibNew := errorFib + errorFibLast
+					errorFibLast = errorFib
+					errorFib = errorFibNew
+
+					errorLast = err
+					log.Printf("[Telegram] Sending error to %s", config.AppConfig.Telegram.MaintainerName)
+					sendTelegram(err.Error(), config.AppConfig.Telegram.MaintainerName, bot)
+				} else {
+					aheadOccurances := errorFib + errorFibLast - errorCount
+					log.Println("[Error] Suppressing error for telegram. Unsuppressed sending in", aheadOccurances, "times")
+				}
+			}
 		}
 
 		if text != nil {
+			if errorLast != nil {
+				log.Println("[Error] cleared error cache")
+			}
+			errorCount = 0
+			errorFibLast = 0
+			errorFib = 1
+			errorLast = nil
 			log.Printf("[Telegram] Sending to channel %s", config.AppConfig.Telegram.ChannelName)
 			sendTelegram(*text, config.AppConfig.Telegram.ChannelName, bot)
 		}

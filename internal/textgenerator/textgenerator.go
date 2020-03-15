@@ -9,7 +9,6 @@ func GenerateTextForNextMatch() (*string, error) {
 	log.Println("[MatchCheck] Waky Waky! Time to check!")
 	match, err := matchfinder.GetNextMatchByHTML()
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	if match == nil {

@@ -1,6 +1,7 @@
 package matchfinder
 
 import (
+	"errors"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
@@ -25,6 +26,17 @@ func GetNextMatchByHTML() (*Match, error) {
 	homeBox := selection.Find("a > div .home-team span").Text()
 	awayBox := selection.Find("a > div .away-team span").Text()
 	timeBox, _ := selection.Find("div > div.bg-icon.icon-clock > time").Attr("datetime")
+
+	if homeBox == "" {
+		return nil, errors.New("home team missing")
+	}
+	if awayBox == "" {
+		return nil, errors.New("other team missing")
+	}
+	if timeBox == "" {
+		return nil, errors.New("time missing")
+	}
+
 	berlin, _ := time.LoadLocation("Europe/Berlin")
 	matchTime, err := time.ParseInLocation(time.RFC3339, strings.TrimSpace(timeBox), berlin)
 
