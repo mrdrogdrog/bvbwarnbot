@@ -1,7 +1,7 @@
 package matchfinder
 
 import (
-	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
+	"bvbwarnbot/internal/config"
 	"time"
 )
 

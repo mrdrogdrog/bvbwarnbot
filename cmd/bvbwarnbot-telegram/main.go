@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.openschubla.de/tilman/bvbwarnbot/internal/config"
-	"git.openschubla.de/tilman/bvbwarnbot/internal/textgenerator"
+	"bvbwarnbot/internal/config"
+	"bvbwarnbot/internal/textgenerator"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"time"

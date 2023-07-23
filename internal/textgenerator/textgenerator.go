@@ -1,7 +1,7 @@
 package textgenerator
 
 import (
-	"git.openschubla.de/tilman/bvbwarnbot/internal/matchfinder"
+	"bvbwarnbot/internal/matchfinder"
 	"log"
 )
 
