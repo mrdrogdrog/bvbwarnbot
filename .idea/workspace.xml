@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e051c862-a7a1-44ef-8fd7-f12667e153ae" name="Changes" comment="init">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2bulbaoIrhUUSxbBuibSTKmZH9C" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Jest.a (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.a.b (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.a.b (2).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.a.b.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.a.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.fetch and parse.will throw if away team is missing.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.fetch and parse.will throw if date is missing.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.fetch and parse.will throw if home team is missing.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.message template.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.message template.generates a away message.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.message template.generates a homecoming message.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.message template.generates a message for tomorrow.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.should inform.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.should inform.will return hours if found.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.should inform.will return null now is after all hours.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.should inform.will return null now is before.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.7.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.7.2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/privat/Coding/bvbwarnbot&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/privat/Coding/bvbwarnbot/node_modules/jest&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/Users/privat/.local/share/nvm/v20.7.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/privat/Coding/bvbwarnbot/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/privat/Coding/bvbwarnbot/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Jest.message template">
+    <configuration name="message template" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/tests/message-template.spec.mts" />
+      <test-names>
+        <test-name value="message template" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="message template.generates a away message" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/message-template.spec.mts" />
+      <test-names>
+        <test-name value="message template" />
+        <test-name value="generates a away message" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="message template.generates a homecoming message" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/message-template.spec.mts" />
+      <test-names>
+        <test-name value="message template" />
+        <test-name value="generates a homecoming message" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="message template.generates a message for tomorrow" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/message-template.spec.mts" />
+      <test-names>
+        <test-name value="message template" />
+        <test-name value="generates a message for tomorrow" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="should inform" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/tests/should-inform.spec.mts" />
+      <test-names>
+        <test-name value="should inform" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.message template" />
+        <item itemvalue="Jest.message template.generates a message for tomorrow" />
+        <item itemvalue="Jest.message template.generates a away message" />
+        <item itemvalue="Jest.message template.generates a homecoming message" />
+        <item itemvalue="Jest.should inform" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e051c862-a7a1-44ef-8fd7-f12667e153ae" name="Changes" comment="" />
+      <created>1707072916579</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707072916579</updated>
+      <workItem from="1707072917769" duration="9021000" />
+      <workItem from="1707082649212" duration="25000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
+  </component>
+</project>
