@@ -8,7 +8,8 @@
     "start": "dotenv -- node dist/index.mjs",
     "format": "prettier -c src/*.mts",
     "format:fix": "prettier -c src/*.mts -w",
-    "dev": "dotenv -- node --loader ts-node/esm src/index.mts"
+    "dev": "dotenv -- node --loader ts-node/esm src/index.mts",
+    "test": "jest"
   },
   "author": "Tilman Vatteroth <git@tilmanvatteroth.de>",
   "license": "MIT",
