@@ -55,9 +55,10 @@ function logError(error: Error) {
   logger.error(error);
 }
 
-logger.log("One for now...");
+logger.log("One check now...");
 await check().catch(logError.bind(this));
-logger.log("... And the rest for the road.");
+logger.log("... and the rest later.");
+logger.log("starting schedule");
 schedule("0 */1 * * *", () => {
   logger.log("Rise and Shine! Time for another check");
   check().catch(logError.bind(this));
