@@ -1,7 +1,7 @@
-import { fetchAndParse } from "../src/fetch-and-parse.mjs";
 import { DateTime } from "luxon";
+import { fetchNextMatch } from "../src/message-generation/fetch-next-match.mjs";
 
-describe("fetch and parse", () => {
+describe("fetch next match", () => {
   it("can fetch and parse data correctly", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -13,7 +13,7 @@ describe("fetch and parse", () => {
       })
     ) as jest.Mock;
 
-    const result = await fetchAndParse();
+    const result = await fetchNextMatch();
 
     expect(result.awayTeam).toBe("Away");
     expect(result.homeTeam).toBe("Home");
@@ -30,7 +30,7 @@ describe("fetch and parse", () => {
       })
     ) as jest.Mock;
 
-    await expect(async () => await fetchAndParse()).rejects.toThrow("couldn't find home-team");
+    await expect(async () => await fetchNextMatch()).rejects.toThrow("couldn't find home-team");
   });
 
   it("will throw if away team is missing", async () => {
@@ -43,7 +43,7 @@ describe("fetch and parse", () => {
       })
     ) as jest.Mock;
 
-    await expect(async () => await fetchAndParse()).rejects.toThrow("couldn't find away-team");
+    await expect(async () => await fetchNextMatch()).rejects.toThrow("couldn't find away-team");
   });
 
   it("will throw if date is missing", async () => {
@@ -56,7 +56,7 @@ describe("fetch and parse", () => {
       })
     ) as jest.Mock;
 
-    await expect(async () => await fetchAndParse()).rejects.toThrow("no time");
+    await expect(async () => await fetchNextMatch()).rejects.toThrow("no time");
   });
 });
 

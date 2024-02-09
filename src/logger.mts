@@ -6,6 +6,7 @@ export const logger = createConsola({
     colors: true,
     date: true,
     columns: 20
-  }
+  },
+  level: 10
 });
 

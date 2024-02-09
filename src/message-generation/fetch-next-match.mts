@@ -23,7 +23,7 @@ function parseTeam(dom: JSDOM, selector: string): string {
   return teamName;
 }
 
-export async function fetchAndParse(): Promise<MatchData> {
+export async function fetchNextMatch(): Promise<MatchData> {
   const response = await fetch("https://www.bvb.de/");
   const dom = new JSDOM(await response.text());
   const homeTeam = parseTeam(dom, "home-team");
