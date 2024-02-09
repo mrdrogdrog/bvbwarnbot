@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS base
+FROM node:lts-slim AS base
 USER node
 WORKDIR /usr/src/app
 COPY --chown=node package.json package.json
