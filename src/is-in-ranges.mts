@@ -1,6 +1,9 @@
 import { DateTime } from "luxon";
 
-export function isInRanges(targetTime: DateTime, hours: number[]): number | null {
+export function isInRanges(
+  targetTime: DateTime,
+  hours: number[],
+): number | null {
   for (const hour of hours) {
     if (isInRange(targetTime, hour)) {
       return hour;
@@ -8,7 +11,6 @@ export function isInRanges(targetTime: DateTime, hours: number[]): number | null
   }
   return null;
 }
-
 
 function isInRange(targetTime: DateTime, hours: number): boolean {
   const later = DateTime.now().plus({ hours: hours });

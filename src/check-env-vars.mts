@@ -1,6 +1,5 @@
 import { logger } from "./logger.mjs";
 
-
 export function parseEnvVar(varName: string): string {
   const value = process.env[varName];
   if (value === undefined) {

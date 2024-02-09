@@ -9,31 +9,46 @@ import { isInRanges } from "./is-in-ranges.mjs";
 import { schedule } from "node-cron";
 
 const senders: MessageSender[] = [
-  new TelegramSender(parseEnvVar("TELEGRAM_API_TOKEN"), parseEnvVar("TELEGRAM_CHAT_ID")),
-  new MatrixSender(parseEnvVar("MATRIX_HOMESERVER_URL"), parseEnvVar("MATRIX_ACCESS_TOKEN"), parseEnvVar("MATRIX_ROOM_ID"))
+  new TelegramSender(
+    parseEnvVar("TELEGRAM_API_TOKEN"),
+    parseEnvVar("TELEGRAM_CHAT_ID"),
+  ),
+  new MatrixSender(
+    parseEnvVar("MATRIX_HOMESERVER_URL"),
+    parseEnvVar("MATRIX_ACCESS_TOKEN"),
+    parseEnvVar("MATRIX_ROOM_ID"),
+  ),
 ];
 
-const errorSender = new TelegramSender(parseEnvVar("TELEGRAM_API_TOKEN"), parseEnvVar("TELEGRAM_ERROR_CHAT_ID"));
-
+const errorSender = new TelegramSender(
+  parseEnvVar("TELEGRAM_API_TOKEN"),
+  parseEnvVar("TELEGRAM_ERROR_CHAT_ID"),
+);
 
 const TEAM_NAME_DORTMUND = "Borussia Dortmund";
 
 async function check() {
   const matchData = await fetchNextMatch();
-  const nextMatchHours = (isInRanges(matchData.time, [4, 24]));
+  const nextMatchHours = isInRanges(matchData.time, [4, 24]);
   if (nextMatchHours === null) {
     return;
   }
-  logger.info(`found a match in ${nextMatchHours} hours.`)
-  const message = await generateMessage(nextMatchHours, matchData.time, matchData.awayTeam, matchData.homeTeam, matchData.homeTeam === TEAM_NAME_DORTMUND);
-
-  await Promise.all(
-    senders.map(sender => sender.sendMessage(message))
+  logger.info(`found a match in ${nextMatchHours} hours.`);
+  const message = await generateMessage(
+    nextMatchHours,
+    matchData.time,
+    matchData.awayTeam,
+    matchData.homeTeam,
+    matchData.homeTeam === TEAM_NAME_DORTMUND,
   );
+
+  await Promise.all(senders.map((sender) => sender.sendMessage(message)));
 }
 
 function logError(error: Error) {
-  errorSender.sendMessage(error.message).catch((telegramError) => logger.error(telegramError));
+  errorSender
+    .sendMessage(error.message)
+    .catch((telegramError) => logger.error(telegramError));
   logger.error(error);
 }
 

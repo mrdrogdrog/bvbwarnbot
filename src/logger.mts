@@ -5,8 +5,7 @@ export const logger = createConsola({
   formatOptions: {
     colors: true,
     date: true,
-    columns: 20
+    columns: 20,
   },
-  level: 10
+  level: 10,
 });
-
