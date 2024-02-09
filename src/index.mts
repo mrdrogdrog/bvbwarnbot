@@ -28,7 +28,7 @@ const errorSender = new TelegramSender(
 
 const TEAM_NAME_DORTMUND = "Borussia Dortmund";
 
-const hourIntervals = parseHourIntervals()
+const hourIntervals = parseHourIntervals();
 
 async function check() {
   const matchData = await fetchNextMatch();
