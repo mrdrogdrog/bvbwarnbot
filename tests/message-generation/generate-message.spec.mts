@@ -1,5 +1,5 @@
 import { DateTime, Settings, Zone } from "luxon";
-import { generateMessage } from "../src/message-generation/generate-message.mjs";
+import { generateMessage } from "../../src/message-generation/generate-message.mjs";
 
 describe('message template', () => {
   beforeEach(() => {

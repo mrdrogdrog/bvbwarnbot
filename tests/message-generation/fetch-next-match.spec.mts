@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { fetchNextMatch } from "../src/message-generation/fetch-next-match.mjs";
+import { fetchNextMatch } from "../../src/message-generation/fetch-next-match.mjs";
 
 describe("fetch next match", () => {
   it("can fetch and parse data correctly", async () => {

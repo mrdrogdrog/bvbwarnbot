@@ -1,12 +1,13 @@
 import { TelegramSender } from "./sender/telegram-sender.mjs";
-import { parseEnvVar } from "./check-env-vars.mjs";
 import { MessageSender } from "./sender/message-sender.mjs";
-import { logger } from "./logger.mjs";
 import { MatrixSender } from "./sender/matrix-sender.mjs";
 import { generateMessage } from "./message-generation/generate-message.mjs";
 import { fetchNextMatch } from "./message-generation/fetch-next-match.mjs";
-import { isInRanges } from "./is-in-ranges.mjs";
 import { schedule } from "node-cron";
+import { parseHourIntervals } from "./utils/parse-hour-intervals.mjs";
+import { parseEnvVar } from "./utils/check-env-vars.mjs";
+import { isInRanges } from "./utils/is-in-ranges.mjs";
+import { logger } from "./utils/logger.mjs";
 
 const senders: MessageSender[] = [
   new TelegramSender(
@@ -27,9 +28,11 @@ const errorSender = new TelegramSender(
 
 const TEAM_NAME_DORTMUND = "Borussia Dortmund";
 
+const hourIntervals = parseHourIntervals()
+
 async function check() {
   const matchData = await fetchNextMatch();
-  const nextMatchHours = isInRanges(matchData.time, [4, 24]);
+  const nextMatchHours = isInRanges(matchData.time, hourIntervals);
   if (nextMatchHours === null) {
     return;
   }

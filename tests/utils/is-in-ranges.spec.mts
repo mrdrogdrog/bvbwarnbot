@@ -1,5 +1,5 @@
-import { isInRanges } from "../src/is-in-ranges.mjs";
 import { DateTime, Settings } from "luxon";
+import { isInRanges } from "../../src/utils/is-in-ranges.mjs";
 
 
 describe("is in ranges", () => {
