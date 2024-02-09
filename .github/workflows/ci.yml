@@ -2,13 +2,35 @@ name: Create and publish a Docker image
 
 on:
   push:
-    branches: ['main']
+    branches: [ 'main' ]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    permissions: read-all
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts"
+
+      - name: install
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: npm run test
+
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
