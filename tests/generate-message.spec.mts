@@ -1,9 +1,13 @@
-import { DateTime, Settings } from "luxon";
+import { DateTime, Settings, Zone } from "luxon";
 import { generateMessage } from "../src/message-generation/generate-message.mjs";
 
 describe('message template', () => {
-  it('generates a homecoming message', async () => {
+  beforeEach(() => {
     Settings.now = () => 0
+    Settings.defaultZone = 'Europe/Berlin'
+  })
+
+  it('generates a homecoming message', async () => {
     const message = await generateMessage(123, DateTime.fromSeconds(0), "AWAY", "HOME", true)
     expect(message).toBe(`⚠️123h-Warnung!⚠️
 
@@ -16,7 +20,6 @@ Vermeide U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz
   })
 
   it('generates a away message', async () => {
-    Settings.now = () => 0
     const message = await generateMessage(123, DateTime.fromSeconds(0), "AWAY", "HOME", false)
     expect(message).toBe(`⚠️123h-Warnung!⚠️
 
@@ -29,7 +32,6 @@ Vermeide Kneipen mit TV
   })
 
   it('generates a message for tomorrow', async () => {
-    Settings.now = () => 0
     const message = await generateMessage(123, DateTime.fromSeconds(100000), "AWAY", "HOME", false)
     expect(message).toBe(`⚠️123h-Warnung!⚠️
 
