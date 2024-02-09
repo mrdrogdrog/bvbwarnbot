@@ -10,4 +10,5 @@ RUN npm install --omit=dev
 FROM base AS runner
 COPY --from=builder --chown=node /usr/src/app/node_modules node_modules
 COPY --chown=node index.mjs index.mjs
+COPY --chown=node message-template.ejs message-template.ejs
 CMD ["node", "index.mjs"]
