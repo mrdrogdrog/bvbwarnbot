@@ -1,6 +1,6 @@
 import { MessageSender } from "./message-sender.mjs";
 import { MatrixClient } from "matrix-bot-sdk";
-import { logger } from "../logger.mjs";
+import { logger } from "../utils/logger.mjs";
 
 export class MatrixSender extends MessageSender {
   private matrixClient: MatrixClient;

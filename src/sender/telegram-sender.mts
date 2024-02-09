@@ -1,6 +1,6 @@
 import { MessageSender } from "./message-sender.mjs";
 import { Telegraf } from "telegraf";
-import { logger } from "../logger.mjs";
+import { logger } from "../utils/logger.mjs";
 
 export class TelegramSender extends MessageSender {
   private telegraf: Telegraf
