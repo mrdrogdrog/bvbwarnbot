@@ -56,12 +56,12 @@ function logError(error: Error) {
 }
 
 logger.log("One check now...");
-await check().catch(error => logError(error));
+await check().catch((error) => logError(error));
 logger.log("... and the rest later.");
-logger.log("Sending message about startup")
-await errorSender.sendMessage("Bot is up")
+logger.log("Sending message about startup");
+await errorSender.sendMessage("Bot is up");
 logger.log("starting schedule");
 schedule("0 */1 * * *", () => {
   logger.log("Rise and Shine! Time for another check");
-  check().catch(error => logError(error));
+  check().catch((error) => logError(error));
 });
