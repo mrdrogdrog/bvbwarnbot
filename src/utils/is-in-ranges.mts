@@ -13,7 +13,8 @@ export function isInRanges(
 }
 
 function isInRange(targetTime: DateTime, hours: number): boolean {
-  const later = DateTime.now().plus({ hours: hours });
-  const laterPlusOne = DateTime.now().plus({ hours: hours + 1 });
+  const now = DateTime.local({ zone: "Europe/Berlin" })
+  const later = now.plus({ hours: hours });
+  const laterPlusOne = now.plus({ hours: hours + 1 });
   return targetTime >= later && targetTime < laterPlusOne;
 }

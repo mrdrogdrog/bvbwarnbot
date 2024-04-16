@@ -3,6 +3,15 @@ import { isInRanges } from "../../src/utils/is-in-ranges.mjs";
 
 
 describe("is in ranges", () => {
+  it("will return hours if found (with real dates)", () => {
+    const fakeNow= DateTime.fromSeconds(        1713283007)
+    const matchTimestamp = DateTime.fromSeconds(1713294000)
+    Settings.now = () => fakeNow.toMillis();
+
+    const result = isInRanges(matchTimestamp, [1, 3, 6])
+    expect(result).toBe(3)
+  })
+
   it("will return hours if found", () => {
     const fakeNow= DateTime.fromSeconds(1000000)
     const matchTimestamp = fakeNow.plus({hours: 3})

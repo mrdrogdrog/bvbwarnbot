@@ -8,16 +8,15 @@ describe("fetch next match", () => {
         text: () => Promise.resolve("<div class='next-match'>" +
           "<div class='home-team'><span>Home</span></div>" +
           "<div class='away-team'><span>Away</span></div>" +
-          "<div class='icon-clock'><time datetime='2024-02-04T21:25:49.000+01:00'></time></div>" +
+          "<div class='icon-clock'><time datetime='2024-04-16T21:00:00+02:00'></time></div>" +
           "</div>")
       })
     ) as jest.Mock;
 
     const result = await fetchNextMatch();
-
     expect(result.awayTeam).toBe("Away");
     expect(result.homeTeam).toBe("Home");
-    expect(result.time).toEqual(DateTime.fromSeconds(1707078349));
+    expect(result.time).toEqual(DateTime.fromSeconds(1713294000));
   });
 
   it("will throw if home team is missing", async () => {
