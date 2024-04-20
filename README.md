@@ -11,7 +11,7 @@ So this bot will help me to avoid public transport on these days.
 ## Origins
 
 This is not the first bvbwarnbot. The original bot ran on Twitter and has been maintained by [Anathem](https://toot.kif.rocks/@anathem).
-After Elon fucked everything, anathem has moved it over to [Mastodon](https://botsin.space/@bvbwarnbot).
+After Elon fucked everything up, anathem has moved it over to [Mastodon](https://botsin.space/@bvbwarnbot).
 
 ## Is it running somewhere?
 
