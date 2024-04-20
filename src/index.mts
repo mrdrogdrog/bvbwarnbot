@@ -8,6 +8,9 @@ import { parseHourIntervals } from "./utils/parse-hour-intervals.mjs";
 import { parseEnvVar } from "./utils/check-env-vars.mjs";
 import { isInRanges } from "./utils/is-in-ranges.mjs";
 import { logger } from "./utils/logger.mjs";
+import { Settings } from "luxon";
+
+Settings.defaultZone = "Europe/Berlin";
 
 const senders: MessageSender[] = [
   new TelegramSender(
