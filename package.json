@@ -9,7 +9,8 @@
     "format": "prettier -c src/*.mts",
     "format:fix": "prettier -c src/*.mts -w",
     "dev": "dotenv -- node --loader ts-node/esm src/index.mts",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky"
   },
   "author": "Tilman Vatteroth <git@tilmanvatteroth.de>",
   "license": "MIT",
@@ -29,6 +30,7 @@
     "@types/luxon": "3.4.2",
     "@types/node-cron": "3.0.11",
     "dotenv-cli": "7.4.1",
+    "husky": "9.0.11",
     "jest": "29.7.0",
     "prettier": "3.2.5",
     "ts-jest": "29.1.2",
