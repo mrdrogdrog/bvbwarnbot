@@ -10,7 +10,7 @@ COPY --chown=node . .
 RUN npm run build
 
 FROM base AS runner
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 COPY --from=builder --chown=node /usr/src/app/dist dist
-COPY --chown=node message-template.ejs message-template.ejs
+COPY --chown=node templates/ templates
 CMD ["node", "dist/index.mjs"]
