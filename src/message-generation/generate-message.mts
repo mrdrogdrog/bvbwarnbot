@@ -4,7 +4,8 @@ import { MatchData } from "./types.mjs";
 
 
 export async function generateMessage(hour: number, match: MatchData): Promise<string> {
-  const formattedDate = `${toRelativeTime(match.time)}${match.time.toFormat("dd.MM.yyyy - HH:mm")}`;
+  const time = match.time.setZone("Europe/Berlin");
+  const formattedDate = `${toRelativeTime(time)}${time.toFormat("dd.MM.yyyy - HH:mm")}`;
 
   return await renderFile(`./templates/${match.reason}.ejs`, { formattedDate, awayTeam: match.awayTeam, homeTeam: match.homeTeam, hour });
 }
