@@ -1,11 +1,12 @@
 import { DateTime } from "luxon";
 import { renderFile } from "ejs";
+import { MatchData } from "./types.mjs";
 
 
-export async function generateMessage(hour: number, date: DateTime, awayTeam: string, homeTeam: string, homecoming: boolean): Promise<string> {
-  const formattedDate = `${toRelativeTime(date)}${date.toFormat("dd.MM.yyyy - HH:mm")}`;
+export async function generateMessage(hour: number, match: MatchData): Promise<string> {
+  const formattedDate = `${toRelativeTime(match.time)}${match.time.toFormat("dd.MM.yyyy - HH:mm")}`;
 
-  return await renderFile("./message-template.ejs", { formattedDate, awayTeam, homeTeam, homecoming, hour });
+  return await renderFile(`./templates/${match.reason}.ejs`, { formattedDate, awayTeam: match.awayTeam, homeTeam: match.homeTeam, hour });
 }
 
 function toRelativeTime(date: DateTime) {

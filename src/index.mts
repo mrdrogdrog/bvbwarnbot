@@ -2,13 +2,14 @@ import { TelegramSender } from "./sender/telegram-sender.mjs";
 import { MessageSender } from "./sender/message-sender.mjs";
 import { MatrixSender } from "./sender/matrix-sender.mjs";
 import { generateMessage } from "./message-generation/generate-message.mjs";
-import { fetchNextMatch } from "./message-generation/fetch-next-match.mjs";
 import { schedule } from "node-cron";
 import { parseHourIntervals } from "./utils/parse-hour-intervals.mjs";
 import { parseEnvVar } from "./utils/check-env-vars.mjs";
 import { isInRanges } from "./utils/is-in-ranges.mjs";
 import { logger } from "./utils/logger.mjs";
 import { Settings } from "luxon";
+import { fetchNextBvbMatch } from "./message-generation/fetch-next-bvb-match.mjs";
+import { fetchNextEmMatches } from "./message-generation/fetch-next-em24-match.mjs";
 
 Settings.defaultZone = "Europe/Berlin";
 
@@ -29,35 +30,37 @@ const errorSender = new TelegramSender(
   parseEnvVar("TELEGRAM_ERROR_CHAT_ID"),
 );
 
-const TEAM_NAME_DORTMUND = "Borussia Dortmund";
+const DRY_RUN = process.env["DRY_RUN"] !== undefined;
 
 const hourIntervals = parseHourIntervals();
 
 async function check() {
-  const matchData = await fetchNextMatch();
-  if (matchData === null) {
-    return;
-  }
-  const nextMatchHours = isInRanges(matchData.time, hourIntervals);
-  if (nextMatchHours === null) {
-    return;
-  }
-  logger.info(`found a match in ${nextMatchHours} hours.`);
-  const message = await generateMessage(
-    nextMatchHours,
-    matchData.time,
-    matchData.awayTeam,
-    matchData.homeTeam,
-    matchData.homeTeam === TEAM_NAME_DORTMUND,
-  );
+  for (const match of [
+    ...(await fetchNextBvbMatch()),
+    ...(await fetchNextEmMatches()),
+  ]) {
+    const nextMatchHours = isInRanges(match.time, hourIntervals);
+    if (nextMatchHours === null) {
+      return;
+    }
+    logger.info(`found a match in ${nextMatchHours} hours.`);
+    const message = await generateMessage(nextMatchHours, match);
 
-  await Promise.all(senders.map((sender) => sender.sendMessage(message)));
+    if (!DRY_RUN) {
+      logger.info(message);
+      if (message !== undefined) {
+        await Promise.all(senders.map((sender) => sender.sendMessage(message)));
+      }
+    }
+  }
 }
 
 function logError(error: Error) {
-  errorSender
-    .sendMessage(error.message)
-    .catch((telegramError) => logger.error(telegramError));
+  if (!DRY_RUN) {
+    errorSender
+      .sendMessage(error.message)
+      .catch((telegramError) => logger.error(telegramError));
+  }
   logger.error(error);
 }
 
