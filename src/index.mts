@@ -43,7 +43,9 @@ async function check() {
     if (nextMatchHours === null) {
       return;
     }
-    logger.info(`found a match in ${nextMatchHours} hours.`);
+    logger.info(
+      `found a match in ${nextMatchHours} hours. ${JSON.stringify(match)}`,
+    );
     const message = await generateMessage(nextMatchHours, match);
 
     if (!DRY_RUN) {
