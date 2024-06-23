@@ -48,8 +48,8 @@ async function check() {
     );
     const message = await generateMessage(nextMatchHours, match);
 
+    logger.info(message);
     if (!DRY_RUN) {
-      logger.info(message);
       if (message !== undefined) {
         await Promise.all(senders.map((sender) => sender.sendMessage(message)));
       }
