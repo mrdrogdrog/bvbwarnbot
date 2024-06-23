@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 
 export function isInRanges(
   targetTime: DateTime,
-  hours: number[],
+  hours: number[]
 ): number | null {
   for (const hour of hours) {
     if (isInRange(targetTime, hour)) {
@@ -13,7 +13,7 @@ export function isInRanges(
 }
 
 function isInRange(targetTime: DateTime, hours: number): boolean {
-  const now = DateTime.local({ zone: "Europe/Berlin" })
+  const now = DateTime.now();
   const later = now.plus({ hours: hours });
   const laterPlusOne = now.plus({ hours: hours + 1 });
   return targetTime >= later && targetTime < laterPlusOne;
