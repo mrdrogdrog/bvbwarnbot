@@ -7,7 +7,7 @@ import { parseHourIntervals } from "./utils/parse-hour-intervals.mjs";
 import { parseEnvVar } from "./utils/check-env-vars.mjs";
 import { isInRanges } from "./utils/is-in-ranges.mjs";
 import { logger } from "./utils/logger.mjs";
-import { Settings } from "luxon";
+import { DateTime, Settings } from "luxon";
 import { fetchNextBvbMatch } from "./message-generation/fetch-next-bvb-match.mjs";
 import { fetchNextEmMatches } from "./message-generation/fetch-next-em24-match.mjs";
 
@@ -66,6 +66,7 @@ function logError(error: Error) {
   logger.error(error);
 }
 
+logger.log(`The time is: ${DateTime.now()}`);
 logger.log("One check now...");
 await check().catch((error) => logError(error));
 logger.log("... and the rest later.");
