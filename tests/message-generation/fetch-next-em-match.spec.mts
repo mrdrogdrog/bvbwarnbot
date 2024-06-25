@@ -81,13 +81,19 @@ describe("fetch next em match", () => {
             matchDateTimeUTC: "2024-09-03T12:00:00",
             team2: { teamName: "team4" },
             team1: { teamName: "team3" },
-            location: { locationCity: "Dortmund" }
+            location: { locationID: 123, locationCity: "Dortmund" }
+          },
+          {
+            matchDateTimeUTC: "2024-09-03T12:00:00",
+            team2: { teamName: "team6" },
+            team1: { teamName: "team7" },
+            location: { locationID: 974, locationCity: "Asad" }
           },
           {
             matchDateTimeUTC: "2024-09-04T12:00:00",
             team2: { teamName: "team4" },
             team1: { teamName: "team5" },
-            location: { locationCity: "Dortmund" }
+            location: { locationID: 974, locationCity: "Dortmund" }
           }
         ] as RawApiMatch[])
       })
@@ -99,6 +105,11 @@ describe("fetch next em match", () => {
       "homeTeam": "team3",
       "reason": "emLocationDortmund",
       "time": DateTime.fromISO("2024-09-03T12:00:00", { zone: "utc" })
+    }, {
+      "awayTeam": "team6",
+      "homeTeam": "team7",
+      "reason": "emLocationDortmund",
+      "time": DateTime.fromISO("2024-09-03T12:00:00.000Z", { zone: "utc" })
     }, {
       "awayTeam": "team4",
       "homeTeam": "team5",

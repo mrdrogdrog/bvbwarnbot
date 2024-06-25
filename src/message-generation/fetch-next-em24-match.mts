@@ -10,6 +10,7 @@ export interface RawApiMatch {
     teamName: string
   }
   location: {
+    locationID: number
     locationCity: string
   }
 
@@ -20,13 +21,15 @@ export interface ParsedApiMatch extends Omit<RawApiMatch, "matchDateTimeUTC"> {
 }
 
 const TEAM_NAME = "Deutschland";
+const LOCATION_NAME_DORTMUND = "Dortmund";
+const LOCATION_ID_DORTMUND = 974
 
 function isComingMatch(match: ParsedApiMatch, today: DateTime): boolean {
   return match.matchDateTimeUTC >= today;
 }
 
 function determineReason(match: ParsedApiMatch): Reason | null {
-  if (match.location.locationCity === "Dortmund") {
+  if (match.location.locationID === LOCATION_ID_DORTMUND || match.location.locationCity.toLowerCase().includes(LOCATION_NAME_DORTMUND.toLowerCase())) {
     return "emLocationDortmund";
   } else if (match.team1.teamName === TEAM_NAME || match.team2.teamName === TEAM_NAME) {
     return "emGermanTeam";
