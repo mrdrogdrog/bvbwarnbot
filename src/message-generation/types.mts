@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 
 
-export type Reason = "emGermanTeam" | "emLocationDortmund" | "bvbHomecoming" | "bvbAway"
+export type Reason = "emGermanTeam" | "emLocationDortmund" | "emGermanTeamInDortmund" | "bvbHomecoming" | "bvbAway"
 
 
 export interface MatchData {

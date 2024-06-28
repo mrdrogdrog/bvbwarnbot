@@ -16,13 +16,7 @@ describe("message template", () => {
       reason: "bvbHomecoming"
     };
     const message = await generateMessage(123, match);
-    expect(message).toBe(`⚠️123h-Warnung!⚠️
-
-Heute, 01.01.1970 - 01:00
-
-🏠BVB-Heimspiel (HOME vs AWAY)
-Vermeide Innenstadt / U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz
-`);
+    expect(message).toMatchSnapshot();
   });
 
   it("generates a bvb away message", async () => {
@@ -33,13 +27,8 @@ Vermeide Innenstadt / U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz
       reason: "bvbAway"
     };
     const message = await generateMessage(123, match);
-    expect(message).toBe(`⚠️123h-Warnung!⚠️
 
-Heute, 01.01.1970 - 01:00
-
-🏕BVB-Auswärtsspiel (AWAY vs HOME)
-Vermeide Kneipen mit TV
-`);
+    expect(message).toMatchSnapshot();
   });
 
   it("generates an EM german team message", async () => {
@@ -50,15 +39,8 @@ Vermeide Kneipen mit TV
       reason: "emGermanTeam"
     };
     const message = await generateMessage(123, match);
-    expect(message).toBe(`⚠️123h-Warnung!⚠️
 
-Heute, 01.01.1970 - 01:00
-
-🇪🇺EM-Spiel (AWAY vs HOME)
-
-EM-Spiel des deutschen Team!
-Vermeide Innenstadt und Kneipen mit TV!
-`);
+    expect(message).toMatchSnapshot();
   });
 
   it("generates an EM Dortmund Location message", async () => {
@@ -69,15 +51,20 @@ Vermeide Innenstadt und Kneipen mit TV!
       reason: "emLocationDortmund"
     };
     const message = await generateMessage(123, match);
-    expect(message).toBe(`⚠️123h-Warnung!⚠️
 
-Heute, 01.01.1970 - 01:00
+    expect(message).toMatchSnapshot();
+  });
 
-🇪🇺EM-Spiel (AWAY vs HOME)
+  it("generates an EM German Team in Dortmund Location message", async () => {
+    const match: MatchData = {
+      time: DateTime.fromSeconds(0),
+      awayTeam: "HOME",
+      homeTeam: "AWAY",
+      reason: "emGermanTeamInDortmund"
+    };
+    const message = await generateMessage(123, match);
 
-Das Spiel findet im Dortmunder Stadium statt!
-Vermeide Innenstadt / U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz
-`);
+    expect(message).toMatchSnapshot();
   });
 
   it("generates a message for tomorrow", async () => {
@@ -89,13 +76,8 @@ Vermeide Innenstadt / U42 / U46 / Kreuzviertel / Borsigplatz / Uni-Parkplatz
     };
 
     const message = await generateMessage(123, match);
-    expect(message).toBe(`⚠️123h-Warnung!⚠️
 
-Morgen, 02.01.1970 - 04:46
-
-🏕BVB-Auswärtsspiel (AWAY vs HOME)
-Vermeide Kneipen mit TV
-`);
+    expect(message).toMatchSnapshot();
   });
 
 
@@ -108,13 +90,8 @@ Vermeide Kneipen mit TV
     };
 
     const message = await generateMessage(123, match);
-    expect(message).toBe(`⚠️123h-Warnung!⚠️
 
-03.03.1973 - 10:46
-
-🏕BVB-Auswärtsspiel (AWAY vs HOME)
-Vermeide Kneipen mit TV
-`);
+    expect(message).toMatchSnapshot();
   });
 });
 

@@ -137,5 +137,42 @@ describe("fetch next em match", () => {
     const matches = await fetchNextEmMatches();
     expect(matches).toEqual([]);
   });
+
+
+  it("will combine emGermanTeam and emLocationDortmund", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve([
+          {
+            matchDateTimeUTC: "2024-09-03T12:00:00",
+            team2: { teamName: "Deutschland" },
+            team1: { teamName: "team3" },
+            location: { locationCity: "Dortmund" }
+          },
+          {
+            matchDateTimeUTC: "2024-09-03T12:00:00",
+            team2: { teamName: "team9" },
+            team1: { teamName: "Deutschland" },
+            location: { locationCity: "Dortmund" }
+          }
+        ] as RawApiMatch[])
+      })
+    ) as jest.Mock;
+
+    const matches = await fetchNextEmMatches();
+    expect(matches).toEqual([{
+      "awayTeam": "Deutschland",
+      "homeTeam": "team3",
+      "reason": "emGermanTeamInDortmund",
+      "time": DateTime.fromISO("2024-09-03T12:00:00", { zone: "utc" })
+    },{
+      "awayTeam": "team9",
+      "homeTeam": "Deutschland",
+      "reason": "emGermanTeamInDortmund",
+      "time": DateTime.fromISO("2024-09-03T12:00:00", { zone: "utc" })
+    }
+    ]);
+  });
+
 });
 
