@@ -41,7 +41,7 @@ async function check() {
   ]) {
     const nextMatchHours = isInRanges(match.time, hourIntervals);
     if (nextMatchHours === null) {
-      return;
+      continue;
     }
     logger.info(
       `found a match in ${nextMatchHours} hours. ${JSON.stringify(match)}`,
