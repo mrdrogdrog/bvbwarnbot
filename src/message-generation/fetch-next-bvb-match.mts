@@ -10,10 +10,10 @@ export interface ApiResponse {
         date: string,
         time: string,
         homeTeam: {
-          viewName: string
+          team: string
         }
         adversaryTeam: {
-          viewName: string
+          team: string
         }
       }[]
     }
@@ -29,8 +29,8 @@ export async function fetchNextBvbMatch(): Promise<MatchData[]> {
   if (item === undefined) {
     return [];
   }
-  const homeTeam = item.homeTeam.viewName;
-  const awayTeam = item.adversaryTeam.viewName;
+  const homeTeam = item.homeTeam.team;
+  const awayTeam = item.adversaryTeam.team;
   const date = item.date;
   const time = item.time;
 

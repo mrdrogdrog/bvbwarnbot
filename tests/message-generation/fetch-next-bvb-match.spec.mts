@@ -11,10 +11,10 @@ describe("fetch next bvb match", () => {
               items: [{
                 date: "2024-04-16",
                 adversaryTeam: {
-                  viewName: "Away"
+                  team: "Away"
                 },
                 homeTeam: {
-                  viewName: "Borussia Dortmund"
+                  team: "Borussia Dortmund"
                 },
                 time: "21:00:00"
               }]
@@ -40,10 +40,10 @@ describe("fetch next bvb match", () => {
               items: [{
                 date: "2024-04-16",
                 adversaryTeam: {
-                  viewName: "Borussia Dortmund"
+                  team: "Borussia Dortmund"
                 },
                 homeTeam: {
-                  viewName: "Away"
+                  team: "Away"
                 },
                 time: "21:00:00"
               }]
