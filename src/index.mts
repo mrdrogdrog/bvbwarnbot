@@ -9,7 +9,6 @@ import { isInRanges } from "./utils/is-in-ranges.mjs";
 import { logger } from "./utils/logger.mjs";
 import { DateTime, Settings } from "luxon";
 import { fetchNextBvbMatch } from "./message-generation/fetch-next-bvb-match.mjs";
-import { fetchNextEmMatches } from "./message-generation/fetch-next-em24-match.mjs";
 
 Settings.defaultZone = "Europe/Berlin";
 
@@ -35,9 +34,7 @@ const DRY_RUN = process.env["DRY_RUN"] !== undefined;
 const hourIntervals = parseHourIntervals();
 
 async function check() {
-  for (const match of [
-    ...(await fetchNextBvbMatch()),
-  ]) {
+  for (const match of [...(await fetchNextBvbMatch())]) {
     const nextMatchHours = isInRanges(match.time, hourIntervals);
     if (nextMatchHours === null) {
       continue;
