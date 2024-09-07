@@ -37,7 +37,6 @@ const hourIntervals = parseHourIntervals();
 async function check() {
   for (const match of [
     ...(await fetchNextBvbMatch()),
-    ...(await fetchNextEmMatches()),
   ]) {
     const nextMatchHours = isInRanges(match.time, hourIntervals);
     if (nextMatchHours === null) {
