@@ -22,7 +22,7 @@ export interface ApiResponse {
 
 export async function fetchNextBvbMatch(): Promise<MatchData[]> {
   const today = DateTime.now().toFormat("yyyy-MM-dd");
-  const response = await fetch(`https://www.bvb.de/graphql/execute.json/bvbweb/get-future-and-current-matches-by-filter;filterLevelTwo=football;today=${today};`);
+  const response = await fetch(`https://www.bvb.de/graphql/execute.json/bvbweb/get-future-and-current-matches-by-filter;filterLevelTwo=football;filterLevelThree=profis;today=${today};`);
   const content = await response.json() as ApiResponse;
 
   const item = content.data.matchcontentfragmentmodelList.items[0];
