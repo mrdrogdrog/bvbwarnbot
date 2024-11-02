@@ -1,4 +1,5 @@
 import { parseHourIntervals } from "../../src/utils/parse-hour-intervals.mjs";
+import { expect, describe, it, vi } from 'vitest'
 
 describe("parse hour intervals", () => {
   it("can parse a single number", () => {

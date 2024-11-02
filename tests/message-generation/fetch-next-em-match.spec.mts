@@ -1,5 +1,6 @@
 import { fetchNextEmMatches, RawApiMatch } from "../../src/message-generation/fetch-next-em24-match.mjs";
 import { DateTime, Settings } from "luxon";
+import { expect, describe, it, vi, beforeEach } from 'vitest'
 
 describe("fetch next em match", () => {
   beforeEach(() => {
@@ -8,7 +9,7 @@ describe("fetch next em match", () => {
   });
 
   it("will ignore games in the past", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve([
           {
@@ -38,7 +39,7 @@ describe("fetch next em match", () => {
   });
 
   it("will show games of the german team", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve([
           {
@@ -74,7 +75,7 @@ describe("fetch next em match", () => {
 
 
   it("will show games that are located in dortmund", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve([
           {
@@ -121,7 +122,7 @@ describe("fetch next em match", () => {
 
 
   it("will ignore games that are not in dortmund and not the german team", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve([
           {
@@ -132,7 +133,7 @@ describe("fetch next em match", () => {
           }
         ] as RawApiMatch[])
       })
-    ) as jest.Mock;
+    ) as vi.Mock;
 
     const matches = await fetchNextEmMatches();
     expect(matches).toEqual([]);
@@ -140,7 +141,7 @@ describe("fetch next em match", () => {
 
 
   it("will combine emGermanTeam and emLocationDortmund", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve([
           {
@@ -157,7 +158,7 @@ describe("fetch next em match", () => {
           }
         ] as RawApiMatch[])
       })
-    ) as jest.Mock;
+    ) as vi.Mock;
 
     const matches = await fetchNextEmMatches();
     expect(matches).toEqual([{

@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
 import { ApiResponse, fetchNextBvbMatch } from "../../src/message-generation/fetch-next-bvb-match.mjs";
+import { expect, describe, it, vi, beforeEach } from 'vitest'
 
 describe("fetch next bvb match", () => {
   it("can detect the next homecoming game", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve({
           data: {
@@ -22,7 +23,7 @@ describe("fetch next bvb match", () => {
           }
         } as ApiResponse)
       })
-    ) as jest.Mock;
+    ) as vi.Mock;
 
     const result = await fetchNextBvbMatch();
     expect(result[0].awayTeam).toBe("Away");
@@ -32,7 +33,7 @@ describe("fetch next bvb match", () => {
   });
 
   it("can detect the next away game", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve({
           data: {
@@ -61,7 +62,7 @@ describe("fetch next bvb match", () => {
   });
 
   it("can fetch and parse data correctly", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve({
           data: {
