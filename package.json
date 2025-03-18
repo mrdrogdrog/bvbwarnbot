@@ -14,7 +14,7 @@
   "author": "Tilman Vatteroth <git@tilmanvatteroth.de>",
   "license": "MIT",
   "dependencies": {
-    "consola": "3.4.0",
+    "consola": "3.4.2",
     "ejs": "3.1.10",
     "luxon": "3.6.1",
     "matrix-bot-sdk": "0.7.1",
